@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  .container
+    h1 Complaints page 
+    p.lead Directo para denunciar
+    br
+    form(role='form', action="/novelties/add",method="post", style='max-width: 300px;')
+      .form-group
+      h1 Seleccione la clase con novedades
+
+      input(type='hidden', value=csrf_token, name=_csfr)
+      select
+        each klass in klasses
+          option(value=klass.id)= klass.name
+
+
+
+      button.btn.btn-default(type='submit') Submit
+      &nbsp;
+      a(href='/')
+        button.btn.btn-primary(type="button") Cancel
+    br
+    h4= info

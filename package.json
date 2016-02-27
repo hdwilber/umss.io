@@ -1,0 +1,32 @@
+{
+  "scripts": {
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "name": "Umss.io",
+  "version": "0.0.0",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "express": ">=4.0",
+    "morgan": "*",
+    "body-parser": "*",
+    "errorhandler": "*",
+    "method-override": "*",
+    "cookie-parser": "*",
+    "serve-favicon": "*",
+    "glob": "*",
+    "mongoose": "*",
+      "jade": "*",
+    "pdf-text": "*",
+    "request": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "csurf":  "*",
+    "express-session": "*",
+    "passport-local-mongoose": "*"
+
+
+  }
+}

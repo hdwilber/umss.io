@@ -1,0 +1,334 @@
+extends ../layout
+
+block header
+  div.row(id='career-modal-row')
+    div.col-md-4(id='career-modal-card')
+      div.card.card-block
+        h4.card-title(id='career-card-title')= 'Licenciatura en la vida'
+        button.btn.btn-primary(id='career-card-btn')= 'Agregar'
+
+  //-div.col-md-3(id='career-card')
+    //-div.card.card-block
+      //-h3.card-title(id='career-card-title')= 'Licenciatura en Ingeniería de sistemas'
+      //-ul(id='career-card-list')
+      //-button.btn.btn-primary(id='career-card-btn')
+  
+  //-div.col-md-3(id='career-card')
+    //-div.card.card-block
+      //-h3.card-title(id='career-card-title')= 'Licenciatura en Ingeniería de sistemas'
+      //-ul(id='career-card-list')
+      //-button.btn.btn-primary(id='career-card-btn')
+  
+
+  nav.navbar.navbar-default.navbar-fixed-top
+    div.container-fluid
+      div.navbar-header
+        button.navbar-toggle.collapsed(data-toggle='collapse',data-target='#navbar-collapse-1',aria-expanded='false', type='button')
+          span.sr-only= 'Toggle navigation'
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='#')= 'WTF!'
+      div.collapse.navbar-collapse(id='navbar-collapse-1')
+        ul.nav.navbar-nav(id='navbar-top')
+          li
+            a(href='#sec-home')= 'Home'
+          li
+            a(data-toggle='modal', data-target='#career-manager-modal')= 'Carreras'
+
+              //-button.btn.btn-info(data-toggle='modal', data-target='#career-manager-modal')= 'Carreras'
+        ul.nav.navbar-nav.pull-right
+          li(id='user-login')
+            //-a
+            form.form-inline(id='user-login-form')
+              div.form-group
+                label= 'username'
+                input.form-control(name='username',type='text', id='user-login-username')
+              div.form-group
+                label= 'password'
+                input.form-control(name='password',type='password', id='user-login-password')
+              div.checkbox
+                label
+                  input(type='checkbox')= 'Remember me'
+              button.btn.btn-default(id='user-login-btn', type='submit')= 'Login'
+          li(id='user-logged')
+            a
+              label(id='user-logged-name')
+              button.btn.btn-primary(id='user-logged-btn')= 'Logout'
+
+
+  section.bg-primary(id='sec-home')
+    div.container
+      div.row
+          div.container
+            div.row
+              h4.text-center
+                  strong= 'Wasting time for fun'
+            div.row
+              div.col-md-12
+                h5.text-center
+                  strong= 'La herramienta para no malgastar el tiempo'
+
+        div.modal.fade(id='career-manager-modal', role='dialog')
+          div.modal-dialog(style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;")
+            div.modal-content
+              div.modal-header
+                button.close(type='button', data-dismiss='modal')= 'Cerrar'
+                h4.motal-title= 'Administrador de carreras'
+              div.modal-body(id='career-manager-body')
+              div.modal-footer
+                button.close(type='button', data-dismiss='modal')= 'Cerrar'
+
+        div.modal.fade(id='klass-manager-modal', role='dialog')
+          div.modal-dialog(style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;")
+            div.modal-content
+              div.modal-header
+                button.close(type='button', data-dismiss='modal')= 'Cerrar'
+              div.modal-body(id='klass-manager-body')
+
+              div.modal-footer
+                button.close(type='button', data-dismiss='modal')= 'Cerrar'
+
+        div.modal.fade(id='time-selector-modal', role='dialog')
+          div.modal-dialog(style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;")
+            div.modal-content
+              div.modal-header
+                button.close(type='button', data-dismiss='modal')= 'Cerrar'
+              div.modal-body(id='time-selector-body')
+                div.row
+                  div.col-md-8
+                    div.btn-group(data-toggle='buttons', id='day-selector-group')
+                      label.btn.btn-primary.active
+                        input(value='LU', autocomplete='off', type='radio', name='day-selector', id='day-selector', checked)
+                        = 'LU'
+                      label.btn.btn-primary
+                        input(value='MA',type='radio', name='day-selector', id='day-selector')
+                        = 'MA'
+                      label.btn.btn-primary
+                        input(value='MI',type='radio', name='day-selector', id='day-selector')
+                        = 'MI'
+                      label.btn.btn-primary
+                        input(value='JU', type='radio', name='day-selector', id='day-selector')
+                        = 'JU'
+                      label.btn.btn-primary
+                        input(value='VI', type='radio', name='day-selector', id='day-selector')
+                        = 'VI'
+                      label.btn.btn-primary
+                        input(value='SA', type='radio', name='day-selector' id='day-selector')
+                        = 'SA'
+                div.row
+                  div.col-md-6
+                    div(id='datetimepicker')
+
+              //-div.modal-footer
+              //-button.close(type='button', data-dismiss='modal')= 'Cerrar'
+    
+
+        div.row
+              div.col-md-10.col-md-offset-1
+                h3.text-center
+                  span.label.label-default(id='dtpicker-label-day',data-toggle='modal', data-target='#time-selector-modal')= 'LU'
+                  span.label= ' - '
+                  span.label.label-default(id='dtpicker-label-time',data-toggle='modal', data-target='#time-selector-modal')= '08:00'
+        div.row
+            div.form-inline.form-group
+              div.col-md-10.col-md-offset-1
+                h3.text-center
+                  span= ' + '
+                  input.form-control.input-lg(id='dtpicker-inc', type='number',min='0',value='2')
+                  span= 'Hours'
+
+    div.container
+      div.row
+        div.col-md-10.col-md-offset-1
+          h3.text-center
+            span.label.label-default(id='carrer-label',data-toggle='modal', data-target='#klass-manager-modal')= 'Select some career'
+
+
+
+  script.
+    current = { 
+      day: 'LU',
+      hh: '08',
+      mm: '00',
+      career: '',
+      inc: 4
+    };
+
+            
+    $(document).ready(function () {
+      //Hide and Create forms for careers
+      cmr = career_modal_row = $('#career-modal-row');
+      cmc = career_modal_card = $('#career-modal-card').clone();
+      career_modal_row.empty();
+      cmb = career_modal_body = $('#career-manager-body');
+
+      // Connect user login button  
+      $('#user-login-btn').click (function (e) {
+        e.preventDefault();
+        //-console.log($('user-login-form').serialize());
+        $.ajax({type: 'POST', url: '/users/login', data: $('#user-login-form').serialize(), dataType: 'json'}).done (function (res) {
+          if (res.result == '1') {
+            $('#user-login').hide();
+            $('#user-logged').show();
+          }
+          else {
+          }
+          console.log (res);
+        });
+      });
+      $('#user-logged-btn').click (function (e) {
+        e.preventDefault();
+        $.ajax({type: 'GET', url: '/users/logout', dataType: 'json'}).done (function (res) {
+          if (res.result == '1') {
+            $('#user-login').show();
+            $('#user-logged').hide();
+            console.log ('Log out: ok');
+          }
+          else {
+            console.log('Log out: wrong');
+          }
+        });
+      });
+
+      // Add time and date picker
+      $('#datetimepicker').datetimepicker({
+          defaultDate: "11/1/2013",
+          //-debug: true,
+          inline: true,
+          collapse: false,
+          toolbarPlacement: 'bottom',
+          sideBySide: true,
+          //-viewMode: 'weeks',
+          format: 'HH:mm'
+
+      }).on('dp.change', function (e) {
+        a =  e.date.format('HHmm');
+        at = $('#day-selector:checked').val() + ' - '+e.date.format('HH:mm');
+        $('#dtpicker-label-day').text($('#day-selector:checked').val());
+        $('#dtpicker-label-time').text(e.date.format('HH:mm'));
+
+        current.hh = e.date.format('HH');
+        current.mm = e.date.format('mm');
+        current.day = $('#day-selector:checked').val();
+        current.inc = $('#dtpicker-inc').val();
+      });;
+
+      $('#dtpicker-inc').change( function () {
+        console.log ($(this).val());
+        current.inc = $(this).val();
+      });
+
+      $('#day-selector-group :input').change( function () {
+        console.log ('Changing day: '+$(this).val());
+        //-$(this).addClass('active').not(this).removeClass('active');
+        $('#dtpicker-label-day').text($(this).val());
+        current.day = $(this).val();
+
+      });
+
+      $('#career-label').click (function (e) {
+        e.preventDefault();
+        console.log ('Seleccionar carrera');
+      });
+
+      // Create and update list of cards 
+      function create_cards (container, preid, list, btn_func) {
+        cars = list;
+
+        for(i = 0; i < cars.length; i++) {
+          if (i%3 == 0) {
+            cmraux = cmr.clone();
+            container.append(cmraux);
+          }
+          cmcaux = cmc.clone();
+          cmcaux.find('#career-card-title').text(cars[i].name);
+          cmcaux.find('#career-card-title').attr('id', 'cmt-'+cars[i]._id);
+          cmraux.append(cmcaux);
+          btn = cmcaux.find('#career-card-btn');
+          btn.attr('id', preid +cars[i]._id);
+          btn.attr('state', '0');
+          btn.click(function (e) {
+            e.preventDefault();
+            btn_func($(this), preid);
+          });
+        }
+      }
+
+      
+      $.when ($.ajax({type: 'GET', url: '/careers/list', dataType: 'json'}),
+              $.ajax({type: 'GET', url: '/novelties/list', dataType: 'json'}))
+              .done( function (careers, novelties) {
+                create_cards ($('#career-manager-body'), 'all-', careers[0], user_career_btn_addrem)
+              });
+
+      function user_career_btn_addrem(b, preid) {
+        aux = '';
+        if (b.attr('state') == '0') {
+          b.attr('state', '1');
+          b.text('Quitar');
+          aux = 'add';
+          $('#'+ preid + b.attr('id').substring(preid.length)).addClass('lol');
+        }
+        else {
+          b.attr('state', '0');
+          b.text('Anadir');
+          aux = 'remove';
+          $('#'+ preid +  b.attr('id').substring(4)).removeClass('lol');
+        }
+        $.ajax({type: 'POST', url: '/users/'+aux+'Career/'+b.attr('id').substring(4)}).done( function (r) {
+          console.log (r);
+        });
+      }
+
+      // create modal window to select career
+
+
+      $.when ($.ajax({type: 'GET', url: '/careers/myList', dataType: 'json'}))
+              .done( function (careers) {
+                create_cards ($('#klass-manager-body'), 'myl-', careers.careers, change_current_career)
+              });
+
+      function change_current_career (b, preid) {
+          current.career = b.attr('id').substring(preid.length);
+          console.log (current);
+          par = current.career+'/'+current.day+'/'+current.hh+current.mm+'/'+(parseInt(current.hh) + parseInt(current.inc))+current.mm;
+          console.log (par);
+          $.ajax({type:'GET', url: '/klasses/myList/'+ par}).done(function (a) {
+            console.log (a);
+          });
+      }
+
+      
+
+      // Check user logged
+      $.ajax({type: "GET", url:  '/users/me', dataType: 'json'}).done (function (me) {
+        if (me.passport.user != undefined) {
+          $('#user-login').hide();
+          $('#user-logged-name').text(me.passport.user);
+
+          $.ajax({type: "GET", url:  '/careers/myList', dataType: 'json'}).done (function (cs) {
+            car = cs.careers;
+            console.log(car);
+            for (i = 0; i < cs.careers.length; i++) {
+              $('#cmt-'+cs.careers[i]._id).addClass('lol');
+              $('#cmb-'+cs.careers[i]._id).text('Quitar');
+            }
+            
+          });
+          
+        
+
+        }
+        else {
+          $('#user-logged').hide();
+        }
+        console.log(me);
+      });;
+
+
+
+      
+    //Close for document ready event
+    });
+

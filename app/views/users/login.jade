@@ -1,17 +1,31 @@
 extends ../layout
-
 block content
-  .container
-    h1 Login Page
-    p.lead Say something worthwhile here.
-    br
-    form(role='form', action="/users/login",method="post", style='max-width: 300px;')
-      input(type='hidden', name='_csrf', value=csrf_token)
-      .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username')
-      .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      button.btn.btn-default(type='submit') Submit
-      &nbsp;
-      a(href='/')
-        button.btn.btn-primary(type="button") Cancel
+  div.container
+    div.row
+      h1= 'User login'
+      div.col-md-4.col-md-offset-4
+        form(role='form', action='/users/session', method='post')
+          input(type='hidden', name='_csrf', value=''+csrf_token)
+          fieldset
+            div.row
+              div.center-block
+                center
+                  i.ion.ion-ios-contact(style='font-size: 96px')
+            div.row
+              //-div.col-sm-12.col-md-10.col-md-offset-1
+              div.col-md-12
+
+                div.form-group
+                  div.input-group
+                    span.input-group-addon
+                      i.glyphicon.glyphicon-user
+                    input.form-control(name='email', placeholder='email')
+                div.form-group
+                  div.input-group
+                    span.input-group-addon
+                      i.glyphicon.glyphicon-lock
+                    input.form-control(type='password', name='password', placeholder='pass')
+                div.form-group
+                  input.btn.btn-lg.btn-primary.btn-block(type='submit', value='Log in')
+                  a.btn.btn-lg.btn-block(href='/signup') Sign up
+

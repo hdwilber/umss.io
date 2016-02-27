@@ -22,41 +22,52 @@ files.forEach(function(file) {
 });
 
 module.exports = function() {
+
+  app.route('/').get(controllers.pages.index);
   app.route('/users/list').get(controllers.users.list);
   app.route('/users/register').post(controllers.users.register);
+  app.route('/users/register').get(controllers.users.register);
   app.route('/users/check').post(controllers.users.check);
   app.route('/users/me').get(function (req, res, next) { res.json(req.session); return next;});
-  app.route('/users/addCareer/:careerId').post(auth.requiresLogin, controllers.users.addCareer);
-  app.route('/users/removeCareer/:careerId').post(auth.requiresLogin, controllers.users.removeCareer);
-  app.route('/users/addKlass/:klassId').post(auth.requiresLogin, controllers.users.addKlass);
+
+  // Articles 
+  app.route('/articles/list').get(controllers.articles.list);
+  app.route('/articles/new').get(controllers.articles.newa);
+  app.route('/articles/new').post(controllers.articles.newa);
+  app.route('/articles/edit/:articleId').get(controllers.articles.edit);
+  app.route('/articles/update/:articleId').post(controllers.articles.update);
+  app.route('/articles/delete/:articleId').delete(controllers.articles.delete);
+
+
+  // News
+  app.route('/news/list').get(controllers.news.list);
+  app.route('/news/new').get(controllers.news.newn);
+  app.route('/news/new').post(controllers.news.newn);
+  app.route('/news/edit/:newsId').get(controllers.news.edit);
+  app.route('/news/update/:newsId').post(controllers.news.update);
+  app.route('/news/delete/:newsId').delete(controllers.news.delete);
+
+  app.route('/projects/list').get(controllers.projects.list);
+  app.route('/projects/new').get(controllers.projects.newp);
+  app.route('/projects/new').post(controllers.projects.newp);
+  app.route('/projects/edit/:projectId').get(controllers.projects.edit);
+  app.route('/projects/update/:projectId').post(controllers.projects.update);
+  app.route('/projects/delete/:projectId').delete(controllers.projects.delete);
 
   app.route('/users/login').get(function (req, res, next) {
-    res.json ({'_csrf': res.locals.csrf_token, 'username': "USERNAME", "password": "THEPASSWORD"});
+    res.render('users/login',{});
   });
+
   app.route('/users/login').post(function(req, res, next) { console.log(req.body); next();}, passport.authenticate('local'),function (req, res, next) {
     console.log (req.body);
     req.session.save (function (err) {
       if (err) {
         return next(err);
       }
-      res.setHeader('Content-Type', 'application/json');
-      res.json({'result': '1', info: 'Login: Ok'});
+      res.redirect('/');
+      //res.json({'result': '1', info: 'Login: Ok'});
     });
   });
-
-
-  app.route('/klasses/list').get(controllers.klasses.list);
-  app.route('/klasses/list/:start/:end').get(controllers.klasses.listByTime);
-  app.route('/klasses/myList/:start/:end').get(controllers.klasses.myList);
-  app.route('/klasses/myList/:day/:start/:end').get(controllers.klasses.myListPerDay);
-  app.route('/klasses/myList/:career/:day/:start/:end').get(controllers.klasses.myListPerDayCareer);
-  app.route('/careers/list').get(controllers.careers.list);
-  app.route('/careers/myList').get(controllers.careers.myList);
-
-  app.route('/novelties/add').post(auth.requiresLogin, controllers.novelties.add);
-  app.route('/novelties/list').get(controllers.novelties.list);
-  app.route('/novelties/edit/:noveltieId').put(controllers.novelties.update);
-  app.route('/novelties/remove/:noveltieId').delete(auth.requiresLogin, controllers.novelties.delete);
 
   app.route('/').get(controllers.pages.index);
 

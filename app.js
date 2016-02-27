@@ -25,7 +25,10 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 mongoose.connect(connection_string);
 
 app.set('views', path.join(process.cwd(), 'app', 'views'));
-app.set('view engine', 'jade');
+//app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
+
+
 app.use(express.static(path.join(process.cwd(), 'public')));
 app.use(require('serve-favicon')(path.join(process.cwd(), 'public', 'favicon.ico')));
 app.use(require('morgan')('combined'));
@@ -48,10 +51,10 @@ var User =require('./app/models/users');
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(function (req, res, next) {
+//app.use(function (req, res, next) {
     //console.log('Time: %d', Date.now());
-  next();
-});
+  //next();
+//});
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());

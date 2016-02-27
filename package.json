@@ -19,6 +19,7 @@
     "glob": "*",
     "mongoose": "*",
       "jade": "*",
+      "ejs": "*",
     "pdf-text": "*",
     "request": "*",
     "passport": "*",

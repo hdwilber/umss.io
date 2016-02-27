@@ -9,9 +9,6 @@ var User = mongoose.Schema({
   email: { type: String},
   type: {type: Number},
   password: {type: String},
-  careers: [{type: mongoose.Schema.ObjectId, ref: 'Career'}],
-  klasses: [{type: mongoose.Schema.ObjectId, ref: 'Klass'}]
-
 }, { collection: 'users' }); 
 
 User.plugin(passportLocalMongoose);

@@ -1,142 +1,26 @@
 extends ../layout
 
 block header
-  div.row(id='career-modal-row')
-    div.col-md-4(id='career-modal-card')
-      div.card.card-block
-        h4.card-title(id='career-card-title')= 'Licenciatura en la vida'
-        button.btn.btn-primary(id='career-card-btn')= 'Agregar'
-
-  //-div.col-md-3(id='career-card')
-    //-div.card.card-block
-      //-h3.card-title(id='career-card-title')= 'Licenciatura en Ingeniería de sistemas'
-      //-ul(id='career-card-list')
-      //-button.btn.btn-primary(id='career-card-btn')
-  
-  //-div.col-md-3(id='career-card')
-    //-div.card.card-block
-      //-h3.card-title(id='career-card-title')= 'Licenciatura en Ingeniería de sistemas'
-      //-ul(id='career-card-list')
-      //-button.btn.btn-primary(id='career-card-btn')
-  
-
-  nav.navbar.navbar-default.navbar-fixed-top
-    div.container-fluid
-      div.navbar-header
-        button.navbar-toggle.collapsed(data-toggle='collapse',data-target='#navbar-collapse-1',aria-expanded='false', type='button')
-          span.sr-only= 'Toggle navigation'
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand(href='#')= 'WTF!'
-      div.collapse.navbar-collapse(id='navbar-collapse-1')
-        ul.nav.navbar-nav(id='navbar-top')
-          li
-            a(href='#sec-home')= 'Home'
-          li
-            a(data-toggle='modal', data-target='#career-manager-modal')= 'Carreras'
-
-              //-button.btn.btn-info(data-toggle='modal', data-target='#career-manager-modal')= 'Carreras'
-        ul.nav.navbar-nav.pull-right
-          li(id='user-login')
-            //-a
-            form.form-inline(id='user-login-form')
-              div.form-group
-                label= 'username'
-                input.form-control(name='username',type='text', id='user-login-username')
-              div.form-group
-                label= 'password'
-                input.form-control(name='password',type='password', id='user-login-password')
-              div.checkbox
-                label
-                  input(type='checkbox')= 'Remember me'
-              button.btn.btn-default(id='user-login-btn', type='submit')= 'Login'
-          li(id='user-logged')
-            a
-              label(id='user-logged-name')
-              button.btn.btn-primary(id='user-logged-btn')= 'Logout'
-
-
-  section.bg-primary(id='sec-home')
-    div.container
-      div.row
-          div.container
-            div.row
-              h4.text-center
-                  strong= 'Wasting time for fun'
-            div.row
-              div.col-md-12
-                h5.text-center
-                  strong= 'La herramienta para no malgastar el tiempo'
-
-        div.modal.fade(id='career-manager-modal', role='dialog')
-          div.modal-dialog(style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;")
-            div.modal-content
-              div.modal-header
-                button.close(type='button', data-dismiss='modal')= 'Cerrar'
-                h4.motal-title= 'Administrador de carreras'
-              div.modal-body(id='career-manager-body')
-              div.modal-footer
-                button.close(type='button', data-dismiss='modal')= 'Cerrar'
-
-        div.modal.fade(id='klass-manager-modal', role='dialog')
-          div.modal-dialog(style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;")
-            div.modal-content
-              div.modal-header
-                button.close(type='button', data-dismiss='modal')= 'Cerrar'
-              div.modal-body(id='klass-manager-body')
-
-              div.modal-footer
-                button.close(type='button', data-dismiss='modal')= 'Cerrar'
-
-        div.modal.fade(id='time-selector-modal', role='dialog')
-          div.modal-dialog(style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;")
-            div.modal-content
-              div.modal-header
-                button.close(type='button', data-dismiss='modal')= 'Cerrar'
-              div.modal-body(id='time-selector-body')
-                div.row
-                  div.col-md-8
-                    div.btn-group(data-toggle='buttons', id='day-selector-group')
-                      label.btn.btn-primary.active
-                        input(value='LU', autocomplete='off', type='radio', name='day-selector', id='day-selector', checked)
-                        = 'LU'
-                      label.btn.btn-primary
-                        input(value='MA',type='radio', name='day-selector', id='day-selector')
-                        = 'MA'
-                      label.btn.btn-primary
-                        input(value='MI',type='radio', name='day-selector', id='day-selector')
-                        = 'MI'
-                      label.btn.btn-primary
-                        input(value='JU', type='radio', name='day-selector', id='day-selector')
-                        = 'JU'
-                      label.btn.btn-primary
-                        input(value='VI', type='radio', name='day-selector', id='day-selector')
-                        = 'VI'
-                      label.btn.btn-primary
-                        input(value='SA', type='radio', name='day-selector' id='day-selector')
-                        = 'SA'
-                div.row
-                  div.col-md-6
-                    div(id='datetimepicker')
-
-              //-div.modal-footer
-              //-button.close(type='button', data-dismiss='modal')= 'Cerrar'
-    
-
-        div.row
-              div.col-md-10.col-md-offset-1
-                h3.text-center
-                  span.label.label-default(id='dtpicker-label-day',data-toggle='modal', data-target='#time-selector-modal')= 'LU'
-                  span.label= ' - '
-                  span.label.label-default(id='dtpicker-label-time',data-toggle='modal', data-target='#time-selector-modal')= '08:00'
-        div.row
-            div.form-inline.form-group
-              div.col-md-10.col-md-offset-1
-                h3.text-center
-                  span= ' + '
-                  input.form-control.input-lg(id='dtpicker-inc', type='number',min='0',value='2')
-                  span= 'Hours'
+    div.navbar.navbar-inverse.navbar-fixed-top.opaque-navbar
+        div.container
+            div.navbar-header
+                button.navbar-toggle
+                    span.gryphicon.glyphicon-chevron-right
+                a.navbar-brand(href='#')='UMSS IO'
+            div.collapse.navbar-collapse(id='navMain')
+                ul.nav.navbar-nav.pull-right
+                    li.active
+                        a(href='#')='Proyectos'
+                    li
+                        a(href='#')='Eventos'
+                    li
+                        a(href='#')='Equipo'
+                    li
+                        a(href='#')='Blog'
+                    li
+                        a(href='#')='Contactanos'
+                        
+block container
 
     div.container
       div.row
@@ -144,7 +28,11 @@ block header
           h3.text-center
             span.label.label-default(id='carrer-label',data-toggle='modal', data-target='#klass-manager-modal')= 'Select some career'
 
-
+block footer
+    div.container
+        div.row
+            div.col-md-12
+                p.text-center= '2015'
 
   script.
     current = { 

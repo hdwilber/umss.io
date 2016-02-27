@@ -25,8 +25,8 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 mongoose.connect(connection_string);
 
 app.set('views', path.join(process.cwd(), 'app', 'views'));
-//app.set('view engine', 'jade');
-app.set('view engine', 'ejs');
+app.set('view engine', 'jade');
+//app.set('view engine', 'ejs');
 
 
 app.use(express.static(path.join(process.cwd(), 'public')));

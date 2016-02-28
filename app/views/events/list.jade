@@ -1,0 +1,20 @@
+extends ../layout
+block content
+  div.container
+    div.row
+      h1= 'Event'
+
+      table
+        th='Title'
+        th='Date'
+        th='Actions'
+        
+        each event in events
+          tr
+            td= event.title
+            td= event.timestamp
+            td
+              a(href='/event/edit/'+event._id)= 'edit/'
+              form(role='form', method='post', action='/events/delete/'+event._id)
+                input(type='hidden', value=_csrf)
+                input(type='submit', value='delete')

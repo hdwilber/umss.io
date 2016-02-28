@@ -7,20 +7,26 @@ module.exports = {
   list: function (req, res) {
     Article.find({}, function (err, arts) {
       if (!err) {
-        res.json (arts);
+        res.render('articles/list',{articles: arts});
       }
     }).populate('user');
   },
 
   newa: function (req, res) {
     if (req.method == 'POST') {
-      Article.save(req.body, function (err) {
-        if (err) {
-          console.log ('Save ok');
-          res.redirect( '/');
+      req.body.user = req.user.id;
+      // PROCESAR TAGS
+      delete(req.body.tags);
+      // PROCESAR TAGS
+      art = new Article (req.body);
+
+      art.save(function (err) {
+        if (!err) {
+          console.log ('Save ok: '+err);
+          res.redirect( '/articles/list');
         }
         else {
-          console.log ('Save not ok');
+          console.log ('Save ok');
           res.redirect( '/articles/new');
         }
       });
@@ -31,19 +37,29 @@ module.exports = {
   },
 
   edit: function (req, res) {
-    Article.find({_id: req.params.articleId}, function (err, art) {
-      res.render('articles/edit', {article: art});
+    Article.findOne({_id: req.params.articleId}, function (err, art) {
+      if (!err) {
+        res.render('articles/edit', {article: art});
+        console.log(art);
+      }
+      else {
+        console.log ('There no exists article');
+      }
     }).populate('user');
   },
 
   update: function (req, res) {
-    Article.update({_id: 'req.params.articleId'}, req.body, function (err) {
+      // MODIFICAR TAGS
+      delete (req.body.tags);
+      // MODIFICAR TAGS
+     
+    Article.update({_id: req.params.articleId}, req.body, function (err) {
       if (!err) {
         console.log ('Article Update success');
         res.redirect('/articles/list');
       }
       else {
-        console.log ('Article Update failed');
+        console.log ('Article Update failed: '+err + '\n\n');
         res.redirect('/articles/edit/' + req.params.articleId);
       }
     });

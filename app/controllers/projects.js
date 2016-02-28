@@ -5,19 +5,20 @@ var Project = mongoose.model('Project');
 
 module.exports = {
   list: function (req, res) {
-    Project.find({}, function (err, arts) {
+    Project.find({}, function (err, projs) {
       if (!err) {
-        res.json (arts);
+        res.render('projects/list',{projects: projs});
       }
-    }).populate('user');
+    }).populate('creator');
   },
 
   newp: function (req, res) {
     if (req.method == 'POST') {
-      Project.save(req.body, function (err) {
-        if (err) {
+      proj = new Project(req.body);
+      proj.save(function (err) {
+        if (!err) {
           console.log ('Save ok');
-          res.redirect( '/');
+          res.redirect( '/projects/list');
         }
         else {
           console.log ('Save not ok');
@@ -31,13 +32,15 @@ module.exports = {
   },
 
   edit: function (req, res) {
-    Project.find({_id: req.params.projectId}, function (err, pro) {
-      res.render('projects/edit', {project: pro});
+    Project.findOne({_id: req.params.projectId}, function (err, pro) {
+      if (!err) {
+        res.render('projects/edit', {project: pro});
+      }
     }).populate('user');
   },
 
   update: function (req, res) {
-    Project.update({_id: 'req.params.projectId'}, req.body, function (err) {
+    Project.update({_id: req.params.projectId}, req.body, function (err) {
       if (!err) {
         console.log ('Project Update success');
         res.redirect('/projects/list');

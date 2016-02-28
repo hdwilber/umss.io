@@ -2,9 +2,8 @@ extends ../layout
 block content
   div.container
     div.row
-      h1= 'User login'
-      div.col-md-4.col-md-offset-4
-        form(role='form', action='/users/login', method='post')
+      h1= 'Create new project'
+        form(role='form', action='/projects/new', method='post')
           input(type='hidden', name='_csrf', value=''+csrf_token)
           fieldset
             div.row
@@ -19,13 +18,13 @@ block content
                   div.input-group
                     span.input-group-addon
                       i.glyphicon.glyphicon-user
-                    input.form-control(name='username', placeholder='email')
+                    input.form-control(type='text', name='title', placeholder='Put title here!')
                 div.form-group
                   div.input-group
                     span.input-group-addon
                       i.glyphicon.glyphicon-lock
-                    input.form-control(type='password', name='password', placeholder='pass')
-                div.form-group
-                  input.btn.btn-lg.btn-primary.btn-block(type='submit', value='Log in')
-                  a.btn.btn-lg.btn-block(href='/users/register') Sign up
+                    //-input.form-control(type='text', name='body', placeholder='pass')
+                    textarea.form-control(name='desc')
 
+                div.form-group
+                  input.btn.btn-lg.btn-primary.btn-block(type='submit', value='Create')

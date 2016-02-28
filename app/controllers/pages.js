@@ -3,16 +3,21 @@ var mongoose = require('mongoose');
 var app = require(path.join(process.cwd(), 'app'));
 var Page = mongoose.model('Page');
 var Article = mongoose.model('Article');
-var News = mongoose.model('News');
+var Event = mongoose.model('Event');
+var Project =mongoose.model ('Project');
 
 
 module.exports = {
   index : function (req, res) {
     Article.find({}, function (err, arts) {
       if (!err) {
-        News.find({}, function (err, newsb) {
+        Event.find({}, function (err, evs) {
           if (!err) {
-            res.render('pages/index', {articles: arts, news: newsb});
+            Project.find({}, function (err, projs) {
+              if (!err) {
+                res.render('pages/index', {articles: arts, events: evs, projects: projs});
+              }
+            });
           }
         });
       }
@@ -20,8 +25,6 @@ module.exports = {
         console.log ('Something gets wrong');
       }
     });
-    res.render('pages/index');
-
   }
 };
 

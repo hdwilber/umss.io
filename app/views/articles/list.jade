@@ -1,0 +1,25 @@
+extends ../layout
+block content
+  div.container
+    div.row
+      h1= 'Articles'
+
+      table
+        th='Title'
+        th='Date'
+        th='Actions'
+        
+        each art in articles
+          tr
+            td= art.title
+            td= art.timestamp
+            td
+              a(href='/articles/edit/'+art._id)= 'edit/'
+              form(role='form', method='post', action='/articles/delete/'+art._id)
+                input(type='hidden', value=_csrf)
+                input(type='submit', value='delete')
+
+
+    div.row
+      h1
+        a(href='/articles/new')= '+'

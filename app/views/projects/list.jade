@@ -1,0 +1,23 @@
+extends ../layout
+block content
+  div.container
+    div.row
+      h1= 'Projects'
+
+      table
+        th='Name'
+        th='Description'
+        th='Actions'
+        
+        each project in projects
+          tr
+            td= project.title
+            td= project.timestamp
+            td
+              a(href='/projects/edit/'+project._id)= 'edit/'
+              form(role='form', method='post', action='/projects/delete/'+project._id)
+                input(type='hidden', value=_csrf)
+                input(type='submit', value='delete')
+    div.row
+      h1
+        a(href='/articles/new')= '+'

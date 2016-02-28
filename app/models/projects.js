@@ -4,12 +4,12 @@ var mongoose = require('mongoose');
 
 var Project = mongoose.Schema({
   title: { type: String },
-  user: {type: mongoose.Schema.ObjectId, ref: 'User'},
+  creator: {type: mongoose.Schema.ObjectId, ref: 'User'},
+  user: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
   name: {type: String},
   desc: {type: String},
   timestamp: {type: Date, default: Date.now()},
-  tags: [{type: String}]
-}, { collection: 'articles' });
+}, { collection: 'projects' });
 
 var model = mongoose.model('Project', Project);
 

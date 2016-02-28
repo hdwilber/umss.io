@@ -31,28 +31,27 @@ module.exports = function() {
   app.route('/users/me').get(function (req, res, next) { res.json(req.session); return next;});
 
   // Articles 
-  app.route('/articles/list').get(controllers.articles.list);
-  app.route('/articles/new').get(controllers.articles.newa);
-  app.route('/articles/new').post(controllers.articles.newa);
-  app.route('/articles/edit/:articleId').get(controllers.articles.edit);
-  app.route('/articles/update/:articleId').post(controllers.articles.update);
-  app.route('/articles/delete/:articleId').delete(controllers.articles.delete);
-
+  app.route('/articles/list').get(auth.requiresLogin, controllers.articles.list);
+  app.route('/articles/new').get(auth.requiresLogin, controllers.articles.newa);
+  app.route('/articles/new').post(auth.requiresLogin, controllers.articles.newa);
+  app.route('/articles/edit/:articleId').get(auth.requiresLogin, controllers.articles.edit);
+  app.route('/articles/update/:articleId').post(auth.requiresLogin, controllers.articles.update);
+  app.route('/articles/delete/:articleId').post(auth.requiresLogin, controllers.articles.delete);
 
   // News
-  app.route('/news/list').get(controllers.news.list);
-  app.route('/news/new').get(controllers.news.newn);
-  app.route('/news/new').post(controllers.news.newn);
-  app.route('/news/edit/:newsId').get(controllers.news.edit);
-  app.route('/news/update/:newsId').post(controllers.news.update);
-  app.route('/news/delete/:newsId').delete(controllers.news.delete);
+  app.route('/events/list').get(controllers.events.list);
+  app.route('/events/new').get(controllers.events.newn);
+  app.route('/events/new').post(controllers.events.newn);
+  app.route('/events/edit/:eventId').get(controllers.events.edit);
+  app.route('/events/update/:eventId').post(controllers.events.update);
+  app.route('/events/delete/:eventId').post(controllers.events.delete);
 
   app.route('/projects/list').get(controllers.projects.list);
   app.route('/projects/new').get(controllers.projects.newp);
   app.route('/projects/new').post(controllers.projects.newp);
   app.route('/projects/edit/:projectId').get(controllers.projects.edit);
   app.route('/projects/update/:projectId').post(controllers.projects.update);
-  app.route('/projects/delete/:projectId').delete(controllers.projects.delete);
+  app.route('/projects/delete/:projectId').post(controllers.projects.delete);
 
   app.route('/users/login').get(function (req, res, next) {
     res.render('users/login',{});
@@ -62,10 +61,12 @@ module.exports = function() {
     console.log (req.body);
     req.session.save (function (err) {
       if (err) {
+        console.log (err);
         return next(err);
       }
-      res.redirect('/');
-      //res.json({'result': '1', info: 'Login: Ok'});
+      else {
+        res.redirect('/');
+      }
     });
   });
 

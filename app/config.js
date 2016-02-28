@@ -10,6 +10,6 @@ module.exports = {
   database: {
     //domain: 'localhost',
     domain: (process.env.OPENSHIFT_MONGODB_DB_URL) ? process.env.OPENSHIFT_MONGODB_DB_URL: 'localhost',
-    name: 'umss.io'
+    name: 'umss-io'
   }
 }

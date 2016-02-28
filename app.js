@@ -11,7 +11,7 @@ app.set('settings', require(path.join(process.cwd(), 'app', 'config')));
 
 var mongoose = require('mongoose');
 
-var connection_string = '127.0.0.1:27017/wtf';
+var connection_string = '127.0.0.1:27017/umss-io';
 // if OPENSHIFT env variables are present, use the available connection info:
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
@@ -20,7 +20,6 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
   process.env.OPENSHIFT_APP_NAME;
 }
-//mongoose.connect('mongodb://' + app.get('settings').database.domain + '/' + app.get('settings').database.name);
 
 mongoose.connect(connection_string);
 
@@ -50,6 +49,7 @@ var User =require('./app/models/users');
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 //app.use(function (req, res, next) {
     //console.log('Time: %d', Date.now());

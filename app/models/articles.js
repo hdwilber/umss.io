@@ -7,7 +7,7 @@ var Article = mongoose.Schema({
   user: {type: mongoose.Schema.ObjectId, ref: 'User'},
   body: {type: String},
   timestamp: {type: Date, default: Date.now()},
-  tags: [{type: String}]
+  tags: {type: mongoose.Schema.ObjectId, ref: 'Tag'},
 }, { collection: 'articles' });
 
 var model = mongoose.model('Article', Article);
